@@ -103,10 +103,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean{
         return when(item.itemId){
             R.id.viewMi -> {
-                val url: Uri = Uri.parse(amb.parametroTv.text.toString())
-                val navegadorIntent: Intent = Intent(ACTION_VIEW, url)
-                startActivity(navegadorIntent)
-                true
+                try {
+                    val url: Uri = Uri.parse(amb.parametroTv.text.toString())
+                    val navegadorIntent: Intent = Intent(ACTION_VIEW, url)
+                    startActivity(navegadorIntent)
+                    true
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Invalid URL", Toast.LENGTH_SHORT).show()
+                    false
+                }
             }
             R.id.callMi -> {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
